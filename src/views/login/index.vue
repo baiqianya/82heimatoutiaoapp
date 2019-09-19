@@ -20,7 +20,7 @@
     </van-cell-group>
 
     <div class="login-btn">
-      <van-button type="info" @click="onLogin">登录</van-button>
+      <van-button type="info" @click="onLogin" :loading="isLoginLoading">登录</van-button>
     </div>
   </div>
 </template>
@@ -36,7 +36,8 @@ export default {
       user: {
         mobile: '',
         code: ''
-      }
+      },
+      isLoginLoading: false
     }
   },
   methods: {
@@ -45,8 +46,10 @@ export default {
       // try.. catch.. 异常处理函数
       try {
         // request 如果请求成功 赋值给 data  // await 等待async执行完再执行 request
+        this.isLoginLoading = true
         const { data } = await login(this.user)
         this.$toast.success('登陆成功')
+        this.isLoginLoading = false
         console.log(data)
       } catch (err) {
         if (err.response && err.response.status === 400) {

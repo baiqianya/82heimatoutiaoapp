@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Button, NavBar, Field, Cell, CellGroup, Toast } from 'vant'
+import { Button, NavBar, Field, Cell, CellGroup, Toast, Loading } from 'vant'
 import './styles/index.less'
 
 Vue.use(Button)
@@ -11,6 +11,7 @@ Vue.use(Button)
   .use(Cell)
   .use(CellGroup)
   .use(Toast)
+  .use(Loading)
 
 Vue.config.productionTip = false
 
