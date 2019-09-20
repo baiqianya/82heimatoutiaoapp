@@ -20,7 +20,6 @@ request.defaults.transformResponse =
 // 请求拦截器
 
 request.interceptors.request.use(function (config) {
-  console.log('烂机器')
   const { user } = store.state
   if (user) {
     config.headers.Authorization = `Bearer ${user.token}`
