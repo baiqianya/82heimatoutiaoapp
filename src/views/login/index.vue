@@ -31,6 +31,7 @@
 <script>
 // 引入 request(请求)文件
 import { login } from '@/api/user'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'LoginIndex',
@@ -45,6 +46,7 @@ export default {
   },
   methods: {
     // async 处理异步执行的代码
+    ...mapMutations(['setUser']),
     async onLogin () {
       // try.. catch.. 异常处理函数
       try {
@@ -58,6 +60,7 @@ export default {
         this.isLoginLoading = true
         const { data } = await login(this.user)
         this.$toast.success('登陆成功')
+        this.setUser(data.data)
         this.isLoginLoading = false
         console.log(data)
       } catch (err) {
