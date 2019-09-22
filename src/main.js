@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Button, NavBar, Field, Cell, CellGroup, Toast, Loading, Tabbar, TabbarItem, Tab, Tabs } from 'vant'
+import { Button, NavBar, Field, Cell, CellGroup, Toast, Loading, Tabbar, TabbarItem, Tab, Tabs, List, PullRefresh, Grid, GridItem, Icon, Image } from 'vant'
 import './styles/index.less'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
 import zhCN from 'vee-validate/dist/locale/zh_CN' // 加载验证插件的语言包
@@ -19,6 +19,12 @@ Vue.use(Button)
   .use(TabbarItem)
   .use(Tab)
   .use(Tabs)
+  .use(List)
+  .use(PullRefresh)
+  .use(Grid)
+  .use(GridItem)
+  .use(Image)
+  .use(Icon)
 
 for (let rule in rules) {
   extend(rule, {

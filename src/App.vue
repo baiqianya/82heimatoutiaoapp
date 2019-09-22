@@ -15,7 +15,7 @@ request({
     with_top: 1
   }
 }).then(res => {
-  console.log(res.data)
+  // console.log(res.data)
 })
 
 export default {

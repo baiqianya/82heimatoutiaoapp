@@ -4,6 +4,7 @@
 <ValidationObserver tag="form" ref="loginForm">
   <ValidationProvider tag="div" name="手机号" rules="required|phone" v-slot="{ errors }">
     <van-field
+      value="输入框已禁用"
       v-model="user.mobile"
       clearable
       label="手机号"
@@ -62,7 +63,7 @@ export default {
         this.$toast.success('登陆成功')
         this.setUser(data.data)
         this.isLoginLoading = false
-        console.log(data)
+        // console.log(data)
       } catch (err) {
         if (err.response && err.response.status === 400) {
           this.$toast.fail('手机号或验证码错误')
