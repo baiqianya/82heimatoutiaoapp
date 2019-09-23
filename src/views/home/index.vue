@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <van-nav-bar title="首页" />
+    <!-- 导航栏 -->
+    <van-nav-bar fixed title="首页" />
+    <!-- 频道列表 -->
     <van-tabs v-model="active">
       <van-tab :title="channel.name" v-for="channel in channels" :key="channel.id">
         <van-pull-refresh v-model="channel.pullDownLoading" @refresh="onRefresh">
@@ -18,14 +20,14 @@
           <div slot="label">
             <van-grid :border="false" :column-num="3">
               <van-grid-item v-for="(img, index) in article.cover.images" :key="index">
-                <van-image height="80" :src="img" />
+                <van-image height="80" :src="img" lazy-load />
               </van-grid-item>
             </van-grid>
             <div class="article-info">
               <div class="meta">
                 <span>{{ article.aut_name }}</span>
                 <span>{{ article.comm_count }}评论</span>
-                <span>{{ article.pubdate }}</span>
+                <span>{{ article.pubdate | relativeTime}}</span>
               </div>
               <van-icon name="close" />
             </div>
@@ -34,7 +36,20 @@
         </van-list>
         </van-pull-refresh>
       </van-tab>
+      <!-- 面包按钮 -->
+      <div slot="nav-right" class="wap-nav" @click="isChannelEditShow = true">
+        <van-icon name="wap-nav" size="24" />
+      </div>
     </van-tabs>
+    <!-- 编辑频道 -->
+    <van-popup
+      v-model="isChannelEditShow"
+      position="bottom"
+      :style="{ height: '95%' }"
+      closeable
+      round
+      close-icon-position="top-left"
+    />
   </div>
 </template>
 
@@ -48,9 +63,7 @@ export default {
     return {
       active: 0,
       channels: [],
-      list: [],
-      loading: false,
-      finished: false
+      isChannelEditShow: true
     }
   },
 
@@ -73,6 +86,7 @@ export default {
         channel.pullDownLoading = false
       })
       this.channels = data.data.channels
+      // console.log(data)
     },
     async onLoad () {
       const currentChannel = this.currentChannel
@@ -137,7 +151,28 @@ export default {
   .van-tabs {
     .van-tabs__content {
       margin-bottom: 50px;
+      margin-top: 90px;
+    }
+    .van-tabs__wrap {
+      position: fixed;
+      top: 46px;
+      right: 0;
+      left: 0;
+      z-index: 2;
     }
   }
+  .article-info{
+    .meta span {
+      margin-right: 10px;
+    }
+  }
+  .wap-nav {
+  position: sticky;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  opacity: 0.8;
+}
 }
 </style>
